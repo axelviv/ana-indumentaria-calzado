@@ -1,0 +1,17 @@
+# .NET
+bin/
+obj/
+
+# Visual Studio Code
+.vscode/
+
+# Logs
+*.log
+
+# Archivos temporales
+*.tmp
+
+# Frontend
+node_modules/
+dist/
+build/
