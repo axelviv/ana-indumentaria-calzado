@@ -6,13 +6,17 @@ using Backend.Enums;
 
 namespace Backend.Entities
 {
-    public class Categoria
+    public class Talle
     {
         public int Id { get; set; }
+
         public string Nombre { get; set; } = string.Empty;
+
         public TipoTalle TipoTalle { get; set; }
 
+        public bool Activo { get; set; } = true;
+
         // Propiedad de navegación
-        public ICollection<Producto> Productos { get; set; } = new List<Producto>();
+        public ICollection<ProductoTalle> ProductoTalles { get; set; } = new List<ProductoTalle>();
     }
 }

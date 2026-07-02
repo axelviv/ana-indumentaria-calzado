@@ -7,6 +7,8 @@ namespace Backend.DTOs.Responses
 {
     public class ConsultarProductosResponseDto
     {
-        
+        public bool Exito { get; set; }
+        public string Mensaje { get; set; } = string.Empty;
+        public List<ProductoResponseDto> Productos { get; set; } = new();
     }
 }

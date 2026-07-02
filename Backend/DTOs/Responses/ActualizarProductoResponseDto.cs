@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Backend.DTOs.Responses
 {
-    public class CrearProductoResponseDto
+    public class ActualizarProductoResponseDto
     {
         public bool Exito { get; set; }
         public string Mensaje { get; set; } = string.Empty;
