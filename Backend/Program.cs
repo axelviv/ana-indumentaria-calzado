@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using Backend.Data;
+using Backend.Services;
 using Backend.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 //Servicios
 builder.Services.AddScoped<ICategoriaService, CategoriaService>();
+builder.Services.AddScoped<ITalleService, TalleService>();
 
 var app = builder.Build();
 
