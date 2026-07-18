@@ -9,7 +9,7 @@ namespace Backend.Services.Interfaces
 {
     public interface ITalleService
     {
-       Task<CrearTalleResponseDto> CrearTalleAsync(CrearTalleRequestDto request);
+        Task<CrearTalleResponseDto> CrearTalleAsync(CrearTalleRequestDto request);
         Task<ConsultarTallesResponseDto> ConsultarTallesAsync(ConsultarTallesRequestDto request);
         Task<ActualizarTalleResponseDto> ActualizarTalleAsync(ActualizarTalleRequestDto request);
         Task<EliminarTalleResponseDto> EliminarTalleAsync(EliminarTalleRequestDto request);

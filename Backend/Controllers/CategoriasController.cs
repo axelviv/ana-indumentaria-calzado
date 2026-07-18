@@ -20,7 +20,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost("CrearCategoria")]
-        public async Task<IActionResult> CrearCategoria([FromBody] CrearCategoriaRequestDto request)
+        public async Task<IActionResult> CrearCategoria(CrearCategoriaRequestDto request)
         {
             var response = await _categoriaService.CrearCategoriaAsync(request);
 
@@ -28,7 +28,7 @@ namespace Backend.Controllers
         }
 
         [HttpPut("ActualizarCategoria")]
-        public async Task<IActionResult> ActualizarCategoria([FromBody] ActualizarCategoriaRequestDto request)
+        public async Task<IActionResult> ActualizarCategoria(ActualizarCategoriaRequestDto request)
         {
             var response = await _categoriaService.ActualizarCategoriaAsync(request);
 
@@ -44,7 +44,7 @@ namespace Backend.Controllers
         }
 
         [HttpDelete("EliminarCategoria")]
-        public async Task<IActionResult> EliminarCategoria([FromBody] EliminarCategoriaRequestDto request)
+        public async Task<IActionResult> EliminarCategoria(EliminarCategoriaRequestDto request)
         {
             var response = await _categoriaService.EliminarCategoriaAsync(request);
 

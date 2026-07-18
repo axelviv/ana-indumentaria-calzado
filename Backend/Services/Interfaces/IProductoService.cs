@@ -13,5 +13,7 @@ namespace Backend.Services.Interfaces
         Task<ConsultarProductosResponseDto> ConsultarProductosAsync(ConsultarProductosRequestDto request);
         Task<ActualizarProductoResponseDto> ActualizarProductoAsync(ActualizarProductoRequestDto request);
         Task<EliminarProductoResponseDto> EliminarProductoAsync(EliminarProductoRequestDto request);
+        Task<AsignarTallesProductoResponseDto> AsignarTallesProductoAsync(AsignarTallesProductoRequestDto request);
+        
     }
 }
