@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Backend.DTOs.Requests;
+using Backend.DTOs.Productos.Requests;
 using Backend.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -56,6 +56,30 @@ namespace Backend.Controllers
         public async Task<IActionResult> AsignarTallesProducto(AsignarTallesProductoRequestDto request)
         {
             var response = await _productoService.AsignarTallesProductoAsync(request);
+
+            return Ok(response);
+        }
+
+        [HttpGet("ConsultarTallesProducto")]
+        public async Task<IActionResult> ConsultarTallesProducto(ConsultarTallesProductoRequestDto request)
+        {
+            var response = await _productoService.ConsultarTallesProductoAsync(request);
+
+            return Ok(response);
+        }
+
+        [HttpPut("ActualizarStockProducto")]
+        public async Task<IActionResult> ActualizarStockProducto(ActualizarStockProductoRequestDto request)
+        {
+            var response = await _productoService.ActualizarStockProductoAsync(request);
+
+            return Ok(response);
+        }
+
+        [HttpDelete("QuitarTalleProducto")]
+        public async Task<IActionResult> QuitarTalleProducto(QuitarTalleProductoRequestDto request)
+        {
+            var response = await _productoService.QuitarTalleProductoAsync(request);
 
             return Ok(response);
         }

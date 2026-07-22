@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Backend.Data;
-using Backend.DTOs.Requests;
-using Backend.DTOs.Responses;
+using Backend.DTOs.Productos.Requests;
+using Backend.DTOs.Productos.Responses;
 using Backend.Entities;
 using Backend.Enums;
 using Backend.Services.Interfaces;
@@ -333,6 +333,118 @@ namespace Backend.Services
             {
                 response.Exito = false;
                 response.Mensaje = $"Ocurrió un error al asignar los talles. {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<ConsultarTallesProductoResponseDto> ConsultarTallesProductoAsync(ConsultarTallesProductoRequestDto request)
+        {
+            ConsultarTallesProductoResponseDto response = new();
+
+            try
+            {
+                bool existeProducto = await _context.Productos
+                    .AnyAsync(p => p.Id == request.ProductoId);
+
+                if (!existeProducto)
+                {
+                    response.Exito = false;
+                    response.Mensaje = "El producto no existe.";
+                    return response;
+                }
+
+                response.Talles = await _context.ProductoTalles
+                    .Where(pt => pt.ProductoId == request.ProductoId)
+                    .Include(pt => pt.Talle)
+                    .OrderBy(pt => pt.Talle.Nombre)
+                    .Select(pt => new ProductoTalleResponseDto
+                    {
+                        ProductoTalleId = pt.Id,
+                        TalleId = pt.TalleId,
+                        Talle = pt.Talle.Nombre,
+                        Stock = pt.Stock
+                    })
+                    .ToListAsync();
+
+                response.Exito = true;
+                response.Mensaje = "Talles consultados correctamente.";
+            }
+            catch (Exception ex)
+            {
+                response.Exito = false;
+                response.Mensaje = $"Ocurrió un error al consultar los talles del producto. {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<ActualizarStockProductoResponseDto> ActualizarStockProductoAsync(ActualizarStockProductoRequestDto request)
+        {
+            ActualizarStockProductoResponseDto response = new();
+
+            try
+            {
+                if (request.Stock < 0)
+                {
+                    response.Exito = false;
+                    response.Mensaje = "El stock no puede ser negativo.";
+                    return response;
+                }
+
+                ProductoTalle? productoTalle = await _context.ProductoTalles
+                    .FirstOrDefaultAsync(pt => pt.Id == request.ProductoTalleId);
+
+                if (productoTalle == null)
+                {
+                    response.Exito = false;
+                    response.Mensaje = "El talle del producto no existe.";
+                    return response;
+                }
+
+                productoTalle.Stock = request.Stock;
+
+                await _context.SaveChangesAsync();
+
+                response.Exito = true;
+                response.Mensaje = "Stock actualizado correctamente.";
+            }
+            catch (Exception ex)
+            {
+                response.Exito = false;
+                response.Mensaje = $"Ocurrió un error al actualizar el stock. {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<QuitarTalleProductoResponseDto> QuitarTalleProductoAsync(QuitarTalleProductoRequestDto request)
+        {
+            QuitarTalleProductoResponseDto response = new();
+
+            try
+            {
+                ProductoTalle? productoTalle = await _context.ProductoTalles
+                    .FirstOrDefaultAsync(pt => pt.Id == request.ProductoTalleId);
+
+                if (productoTalle == null)
+                {
+                    response.Exito = false;
+                    response.Mensaje = "El talle del producto no existe.";
+                    return response;
+                }
+
+                _context.ProductoTalles.Remove(productoTalle);
+
+                await _context.SaveChangesAsync();
+
+                response.Exito = true;
+                response.Mensaje = "Talle quitado del producto correctamente.";
+            }
+            catch (Exception ex)
+            {
+                response.Exito = false;
+                response.Mensaje = $"Ocurrió un error al quitar el talle del producto. {ex.Message}";
             }
 
             return response;

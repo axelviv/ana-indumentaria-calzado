@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Backend.DTOs.Requests;
+using Backend.DTOs.Categorias.Requests;
 using Backend.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

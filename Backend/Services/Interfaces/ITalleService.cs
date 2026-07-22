@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Backend.DTOs.Requests;
-using Backend.DTOs.Responses;
+using Backend.DTOs.Talles.Requests;
+using Backend.DTOs.Talles.Responses;
 
 namespace Backend.Services.Interfaces
 {

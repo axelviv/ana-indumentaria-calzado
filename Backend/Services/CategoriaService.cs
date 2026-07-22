@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Backend.Data;
-using Backend.DTOs.Requests;
-using Backend.DTOs.Responses;
+using Backend.DTOs.Categorias.Requests;
+using Backend.DTOs.Categorias.Responses;
 using Backend.Entities;
 using Microsoft.EntityFrameworkCore;
 

@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Backend.DTOs.Requests;
-using Backend.DTOs.Responses;
+using Backend.DTOs.Productos.Requests;
+using Backend.DTOs.Productos.Responses;
 
 namespace Backend.Services.Interfaces
 {
@@ -14,6 +14,8 @@ namespace Backend.Services.Interfaces
         Task<ActualizarProductoResponseDto> ActualizarProductoAsync(ActualizarProductoRequestDto request);
         Task<EliminarProductoResponseDto> EliminarProductoAsync(EliminarProductoRequestDto request);
         Task<AsignarTallesProductoResponseDto> AsignarTallesProductoAsync(AsignarTallesProductoRequestDto request);
-        
+        Task<ConsultarTallesProductoResponseDto> ConsultarTallesProductoAsync(ConsultarTallesProductoRequestDto request);
+        Task<ActualizarStockProductoResponseDto> ActualizarStockProductoAsync(ActualizarStockProductoRequestDto request);
+        Task<QuitarTalleProductoResponseDto> QuitarTalleProductoAsync(QuitarTalleProductoRequestDto request);
     }
 }
