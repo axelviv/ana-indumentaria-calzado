@@ -19,7 +19,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 //Servicios
 builder.Services.AddScoped<ICategoriaService, CategoriaService>();
+builder.Services.AddScoped<IProductoService, ProductoService>();
 builder.Services.AddScoped<ITalleService, TalleService>();
+builder.Services.AddScoped<IImagenService, ImagenLocalService>();
 
 var app = builder.Build();
 
@@ -31,6 +33,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.MapControllers();
 
 app.Run();

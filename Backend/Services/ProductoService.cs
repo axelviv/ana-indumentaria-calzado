@@ -15,10 +15,12 @@ namespace Backend.Services
     public class ProductoService : IProductoService
     {
         private readonly AppDbContext _context;
+        private readonly IImagenService _imagenService;
 
-        public ProductoService(AppDbContext context)
+        public ProductoService(AppDbContext context, IImagenService imagenService)
         {
             _context = context;
+            _imagenService = imagenService;
         }
 
         public async Task<CrearProductoResponseDto> CrearProductoAsync(CrearProductoRequestDto request)
@@ -72,8 +74,22 @@ namespace Backend.Services
                 if (existeProducto)
                 {
                     response.Exito = false;
-                    response.Mensaje = "Ya existe un producto con ese nombre en la categoría seleccionada.";
+                    response.Mensaje = "Ya existe un producto con ese nombre en la categoría seleccionada";
                     return response;
+                }
+
+                string? rutaImagen = null;
+
+                if (request.Imagen != null)
+                {
+                    if (request.Imagen.Length > 5 * 1024 * 1024)
+                    {
+                        response.Exito = false;
+                        response.Mensaje = "La imagen no puede superar los 5 MB";
+                        return response;
+                    }
+
+                    rutaImagen = await _imagenService.SubirImagenAsync(request.Imagen);
                 }
 
                 Producto producto = new()
@@ -83,7 +99,7 @@ namespace Backend.Services
                     Precio = request.Precio,
                     Genero = request.Genero,
                     CategoriaId = request.CategoriaId,
-                    RutaImagen = request.RutaImagen
+                    RutaImagen = rutaImagen
                 };
 
                 _context.Productos.Add(producto);

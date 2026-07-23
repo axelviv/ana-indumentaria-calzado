@@ -12,7 +12,7 @@ namespace Backend.DTOs.Productos.Requests
         public string? Descripcion { get; set; }
         public decimal Precio { get; set; }
         public Genero Genero { get; set; }
-        public string? RutaImagen { get; set; }
+        public IFormFile? Imagen { get; set; }
         public int CategoriaId { get; set; }
     }
 }

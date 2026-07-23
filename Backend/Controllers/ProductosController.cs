@@ -21,7 +21,7 @@ namespace Backend.Controllers
 
 
         [HttpPost("CrearProducto")]
-        public async Task<IActionResult> CrearProducto(CrearProductoRequestDto request)
+        public async Task<IActionResult> CrearProducto([FromForm] CrearProductoRequestDto request)
         {
             var response = await _productoService.CrearProductoAsync(request);
 
